@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Log in · Household Chores{% endblock %}
+{% block content %}
+<section class="card card--narrow auth-card">
+  <img class="auth-card__logo" src="{% static 'img/logo.svg' %}" alt="Household Chores" width="56" height="56">
+  <h1>Log in</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Log in</button>
+  </form>
+  <p class="muted">No account yet? <a href="{% url 'signup' %}">Sign up</a>.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Household full · Household Chores{% endblock %}
+{% block content %}
+<section class="card card--narrow auth-card">
+  <img class="auth-card__logo" src="{% static 'img/logo.svg' %}" alt="Household Chores" width="56" height="56">
+  <h1>{{ household.name }} is full</h1>
+  <p class="lead">This household already has the maximum number of members, so new sign-ups are closed.</p>
+  <p class="muted">Already a member? <a href="{% url 'login' %}">Log in</a>.</p>
+</section>
+{% endblock %}

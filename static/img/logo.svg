@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="hc-title">
+  <title id="hc-title">Household Chores</title>
+  <!-- rounded blue tile -->
+  <rect width="64" height="64" rx="14" fill="#2F6FED"/>
+  <!-- house silhouette -->
+  <path d="M32 11 9 31h7v22h32V31h7Z" fill="#FFFFFF"/>
+  <!-- check mark: a chore done -->
+  <path d="M23.5 37.5 30 44l11-13" fill="none" stroke="#1F5FBF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Chores · Household Chores{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Chores</h1>
+  {% if user.is_household_admin %}<a class="button" href="{% url 'chore_create' %}">Add chore</a>{% endif %}
+</div>
+
+{% if chores %}
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Chore</th>
+        <th>Recurrence</th>
+        <th>Points</th>
+        <th>Rotation starts with</th>
+        <th>Status</th>
+        {% if user.is_household_admin %}<th><span class="visually-hidden">Actions</span></th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for chore in chores %}
+      <tr{% if chore.is_paused %} class="is-paused"{% endif %}>
+        <td><strong>{{ chore.title }}</strong></td>
+        <td>{{ chore.get_recurrence_display }}<br><span class="muted">{{ chore.deadline_label }}</span></td>
+        <td>{{ chore.points }}</td>
+        <td>{{ chore.rotation_start_member.username|default:"—" }}</td>
+        <td>
+          {% if chore.is_paused %}<span class="badge">Paused</span>{% else %}<span class="badge badge--accent">Active</span>{% endif %}
+        </td>
+        {% if user.is_household_admin %}
+        <td>
+          <div class="actions">
+            <a href="{% url 'chore_update' chore.pk %}">Edit</a>
+            <form method="post" action="{% url 'chore_toggle_pause' chore.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="button--link">{% if chore.is_paused %}Resume{% else %}Pause{% endif %}</button>
+            </form>
+            <a class="danger" href="{% url 'chore_delete' chore.pk %}">Delete</a>
+          </div>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<section class="card empty">
+  <p><strong>No chores yet.</strong></p>
+  {% if user.is_household_admin %}
+    <p><a class="button" href="{% url 'chore_create' %}">Add the first chore</a></p>
+  {% else %}
+    <p class="muted">The administrator hasn't added any chores yet.</p>
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign up · Household Chores{% endblock %}
+{% block content %}
+<section class="card card--narrow auth-card">
+  <img class="auth-card__logo" src="{% static 'img/logo.svg' %}" alt="Household Chores" width="56" height="56">
+  {% if household %}
+    <h1>Join {{ household.name }}</h1>
+    <p class="lead">You'll join as a roommate. {{ household.member_count }} of {{ max_members }} spots are taken.</p>
+  {% else %}
+    <h1>Create your household</h1>
+    <p class="lead">You're the first one here, so you'll create the household and become its administrator.</p>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit">Sign up</button>
+  </form>
+  <p class="muted">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+</section>
+{% endblock %}

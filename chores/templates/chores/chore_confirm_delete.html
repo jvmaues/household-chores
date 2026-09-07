@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Delete chore · Household Chores{% endblock %}
+{% block content %}
+<section class="card card--narrow">
+  <h1>Delete “{{ chore.title }}”?</h1>
+  <p class="lead">This removes the chore for everyone. It can't be undone.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-actions">
+      <button type="submit" class="button--danger">Delete chore</button>
+      <a class="button button--ghost" href="{% url 'chore_list' %}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

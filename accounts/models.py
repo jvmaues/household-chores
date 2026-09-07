@@ -40,6 +40,10 @@ class Household(models.Model):
     def is_full(self):
         return self.member_count >= self.MAX_MEMBERS
 
+    def rotation_order(self):
+        """Members in the order chores rotate through them: by join date."""
+        return self.members.order_by("date_joined", "pk")
+
 
 class User(AbstractUser):
     household = models.ForeignKey(

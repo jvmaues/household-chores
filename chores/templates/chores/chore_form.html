@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{% if chore %}Edit chore{% else %}New chore{% endif %} · Household Chores{% endblock %}
+{% block content %}
+<section class="card card--narrow">
+  <h1>{% if chore %}Edit “{{ chore.title }}”{% else %}New chore{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <div class="form-actions">
+      <button type="submit">{% if chore %}Save changes{% else %}Add chore{% endif %}</button>
+      <a class="button button--ghost" href="{% url 'chore_list' %}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Household Chores{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<section class="card">
+  {% if user.household %}
+    <p>Welcome, <strong>{{ user.username }}</strong>. You are
+      {% if user.is_household_admin %}the administrator{% else %}a roommate{% endif %}
+      of <strong>{{ user.household.name }}</strong>.</p>
+    <p class="muted">Your chores, deadlines and pending approvals will show up here.</p>
+  {% else %}
+    <p>Welcome, <strong>{{ user.username }}</strong>. You are not part of a household yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
